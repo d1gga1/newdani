@@ -3551,6 +3551,36 @@ header.smaller:not(.header-bottom):not(.side-header) {
     </header>
     <!-- header close -->
 
+
+    <h1 id="welcome"></h1>
+  <p id="description"></p>
+
+  <!-- Pulsanti per la selezione della lingua -->
+  <button onclick="changeLanguage('en')">English</button>
+  <button onclick="changeLanguage('it')">Italian</button>
+
+  <!-- Script per gestire la traduzione -->
+  <script>
+    // Funzione per cambiare lingua e caricare il file JSON corrispondente
+    function changeLanguage(language) {
+      fetch(`translations_${language}.json`)
+        .then(response => response.json())
+        .then(data => {
+          // Aggiorna il testo degli elementi tradotti
+          document.getElementById('welcome').innerText = data.welcome;
+          document.getElementById('description').innerText = data.description;
+          // Salva la lingua selezionata nel localStorage
+          localStorage.setItem('selectedLanguage', language);
+        });
+    }
+
+    // All'avvio della pagina, carica la lingua selezionata o imposta quella di default
+    window.onload = function() {
+      const savedLang = localStorage.getItem('selectedLanguage') || 'en'; // Imposta inglese come default
+      changeLanguage(savedLang);
+    }
+  </script>
+
     
 	
 					<section class="wpb-content-wrapper"><section class="wpb_row vc_row-fluid no-padding"><div class="row"><div class="slider wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper ">
