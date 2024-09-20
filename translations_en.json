@@ -1,5 +1,9 @@
 {
-    "welcome": "Welcome to our website",
-    "description": "This is the English version of our website."
-  }
-  
+  "about_us": "About us",
+  "our_services": "Our Services",
+  "contact": "Contact",
+  "second_slide" : "Your True Partner in Business",
+  "third_slide" : "to make your life easier" ,
+  "fourth_slide" : "And to have a safe operations maintenance" ,
+  "fifth_slide" : "To achieve benchmark  performance " 
+}
