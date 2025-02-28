@@ -3954,26 +3954,33 @@ var wpcf7 = {"api":{"root":"https:\/\/vaaman.in\/wp-json\/","namespace":"contact
 var wpforms_settings = {"val_required":"This field is required.","val_email":"Please enter a valid email address.","val_email_suggestion":"Did you mean {suggestion}?","val_email_suggestion_title":"Click to accept this suggestion.","val_email_restricted":"This email address is not allowed.","val_number":"Please enter a valid number.","val_number_positive":"Please enter a valid positive number.","val_confirm":"Field values do not match.","val_checklimit":"You have exceeded the number of allowed selections: {#}.","val_limit_characters":"{count} of {limit} max characters.","val_limit_words":"{count} of {limit} max words.","val_recaptcha_fail_msg":"Google reCAPTCHA verification failed, please try again later.","val_empty_blanks":"Please fill out all blanks.","uuid_cookie":"1","locale":"en","wpforms_plugin_url":"https:\/\/vaaman.in\/wp-content\/plugins\/wpforms\/","gdpr":"","ajaxurl":"https:\/\/vaaman.in\/wp-admin\/admin-ajax.php","mailcheck_enabled":"1","mailcheck_domains":[],"mailcheck_toplevel_domains":["dev"],"is_ssl":"1","currency_code":"USD","currency_thousands":",","currency_decimals":"2","currency_decimal":".","currency_symbol":"$","currency_symbol_pos":"left","val_requiredpayment":"Payment is required.","val_creditcard":"Please enter a valid credit card number.","val_post_max_size":"The total size of the selected files {totalSize} Mb exceeds the allowed limit {maxSize} Mb.","val_time12h":"Please enter time in 12-hour AM\/PM format (eg 8:45 AM).","val_time24h":"Please enter time in 24-hour format (eg 22:45).","val_time_limit":"Please enter time between {minTime} and {maxTime}.","val_url":"Please enter a valid URL.","val_fileextension":"File type is not allowed.","val_filesize":"File exceeds max size allowed. File was not uploaded.","post_max_size":"67108864","val_password_strength":"A stronger password is required. Consider using upper and lower case letters, numbers, and symbols.","val_phone":"Please enter a valid phone number.","richtext_add_media_button":"","entry_preview_iframe_styles":["https:\/\/vaaman.in\/wp-includes\/js\/tinymce\/skins\/lightgray\/content.min.css?ver=6.5.5","https:\/\/vaaman.in\/wp-includes\/css\/dashicons.min.css?ver=6.5.5","https:\/\/vaaman.in\/wp-includes\/js\/tinymce\/skins\/wordpress\/wp-content.css?ver=6.5.5"]}
 /* ]]> */
 
-document.querySelector("#wpforms-form-2213").addEventListener("submit", function(event) {
-    event.preventDefault(); // Evita il refresh della pagina
-    var form = this;
-    var formData = new FormData(form);
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector("#wpforms-form-2213").addEventListener("submit", function(event) {
+        event.preventDefault(); // Evita il refresh della pagina
+        var form = this;
+        var formData = new FormData(form);
 
-    fetch(form.action, {
-        method: "POST",
-        body: formData,
-        headers: { "Accept": "application/json" }
-    }).then(response => {
-        if (response.ok) {
-            alert("Messaggio inviato con successo! Ti risponderemo al più presto.");
-            form.reset();
-        } else {
-            alert("Errore nell'invio del messaggio. Riprova.");
-        }
-    }).catch(error => {
-        alert("Errore di connessione. Controlla la tua rete.");
+        fetch(form.action, {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json()) // Legge la risposta in JSON
+        .then(data => {
+            if (data.ok || response.ok) { // Formspree restituisce 'ok' se tutto va bene
+                alert("Messaggio inviato con successo! Ti risponderemo al più presto.");
+                form.reset();
+            } else {
+                alert("Errore nell'invio del messaggio. Controlla i dettagli.");
+                console.error("Errore server:", data);
+            }
+        })
+        .catch(error => {
+            alert("Errore di connessione. Controlla la tua rete.");
+            console.error("Errore di rete:", error);
+        });
     });
 });
+
 </script>
 </body>
 </html>
