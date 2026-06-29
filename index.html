@@ -857,17 +857,68 @@ function toggleNav() {
 document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{ if(navOpen) toggleNav(); }));
 
 /* ─────────────────────────────────────────
-   FORM
+   FORM — Web3Forms integration
+   Get your free key at: web3forms.com
+   Enter contact@dajboctechdon.com and check email for the key
 ───────────────────────────────────────── */
-function handleSend(btn) {
+const WEB3FORMS_KEY = '1b7d2f36-8581-4b54-a020-27ccb4ff4e80';
+
+async function handleSend(btn) {
+  const name    = document.getElementById('fn').value.trim();
+  const email   = document.getElementById('fe').value.trim();
+  const subject = document.getElementById('fs').value.trim();
+  const message = document.getElementById('fm').value.trim();
+
+  if (!name || !email || !message) {
+    const missing = currentLang === 'ro' ? 'Completați toate câmpurile obligatorii.' : 'Please fill in your name, email and message.';
+    alert(missing);
+    return;
+  }
+
   const orig = T[currentLang]['con.send'];
-  btn.textContent = T[currentLang]['con.sending'];
-  btn.disabled=true; btn.style.opacity='.7';
-  setTimeout(()=>{
-    btn.textContent = T[currentLang]['con.sent'];
-    btn.style.background='linear-gradient(135deg,#16a34a,#22c55e)'; btn.style.opacity='1';
-    setTimeout(()=>{ btn.textContent=orig; btn.style.background=''; btn.disabled=false; },3500);
-  },1600);
+  btn.textContent = T[currentLang]['con.sending'] || 'Sending…';
+  btn.disabled = true;
+  btn.style.opacity = '.7';
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        name,
+        email,
+        subject: subject || 'New message from DajbocTechDon website',
+        message,
+        botcheck: ''
+      })
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      btn.textContent = T[currentLang]['con.sent'] || '✓ Sent!';
+      btn.style.background = 'linear-gradient(135deg,#16a34a,#22c55e)';
+      btn.style.opacity = '1';
+      ['fn','fe','fs','fm'].forEach(id => document.getElementById(id).value = '');
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 4000);
+    } else {
+      throw new Error(data.message || 'Failed');
+    }
+  } catch(err) {
+    console.error('Form error:', err);
+    btn.textContent = '✗ Error — try again';
+    btn.style.background = 'linear-gradient(135deg,#ef4444,#dc2626)';
+    btn.style.opacity = '1';
+    setTimeout(() => {
+      btn.textContent = orig;
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 3500);
+  }
 }
 
 /* ─────────────────────────────────────────
