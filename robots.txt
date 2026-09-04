@@ -1,0 +1,10 @@
+# robots.txt — dajboctechdon.com
+User-agent: *
+Allow: /
+
+# Vecchie pagine del template (Control.html, Design.html, Test.html, ecc.)
+# sono escluse dall'indice tramite <meta name="robots" content="noindex,nofollow">
+# dentro ciascuna pagina. NON usare Disallow qui: bloccherebbe la scansione
+# e Google non riuscirebbe a leggere il noindex.
+
+Sitemap: https://dajboctechdon.com/sitemap.xml
