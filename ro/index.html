@@ -251,6 +251,11 @@ footer{padding:3.5rem 5% 2rem;background:var(--bg);border-top:1px solid var(--bo
 .flinks a:hover{color:var(--accent);transform:translateX(5px);}
 .fbot{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;}
 .fbot p{font-size:.82rem;color:var(--muted);}
+.madeby{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--muted);font-size:.8rem;letter-spacing:.04em;padding:.45rem .8rem;border:1px solid var(--border);border-radius:999px;transition:color .3s,border-color .3s,background .3s,transform .3s;}
+.madeby img{height:22px;width:auto;display:block;opacity:.75;transition:opacity .3s,transform .3s;}
+.madeby:hover{color:#fff;border-color:rgba(0,200,255,.45);background:rgba(0,200,255,.06);transform:translateY(-2px);}
+.madeby:hover img{opacity:1;transform:scale(1.06);}
+
 .socials{display:flex;gap:.8rem;}
 .sl{width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--muted);font-size:.9rem;transition:all .3s;}
 .sl:hover{background:var(--accent);color:#000;border-color:var(--accent);transform:translateY(-3px);box-shadow:0 5px 18px rgba(0,200,255,.4);}
@@ -882,6 +887,10 @@ footer{padding:3.5rem 5% 2rem;background:var(--bg);border-top:1px solid var(--bo
   </div>
   <div class="fbot">
     <p data-i18n="foot.copy">© 2025 DajbocTechDon S.R.L. Toate drepturile rezervate.</p>
+    <a href="https://danova-tech.com/" target="_blank" rel="noopener" class="madeby" title="DANOVA TECH">
+      <span data-i18n="foot.madeby">Site realizat de</span>
+      <img src="https://danova-tech.com/assets/img/logo.png" alt="DANOVA TECH" height="22" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('strong'),{textContent:'DANOVA TECH'}))">
+    </a>
     <div class="socials">
       <a href="https://www.linkedin.com/company/dajboctechdon/" target="_blank" rel="noopener" class="sl" title="LinkedIn">
         <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
@@ -978,7 +987,7 @@ const T = {
     'faq.a5':"Yes. We produce single custom parts, prototypes, spare parts and small to medium series. Every component is manufactured and tested in-house, so quality is controlled at every step.",
     'faq.q6':"How can I request a quote for CNC machining?",
     'faq.a6':"Send us your technical drawing or 3D model through the contact form on this page, by email at contact@dajboctechdon.com, or call +40 744 987 550. We will review the specifications and come back with a quotation and lead time.",
-    'foot.nav':'Navigation','foot.copy':'© 2025 DajbocTechDon S.R.L. All rights reserved.'
+    'foot.nav':'Navigation','foot.copy':'© 2025 DajbocTechDon S.R.L. All rights reserved.','foot.madeby':'Website by'
   },
   ro: {
     'nav.home':'Acasă','nav.about':'Despre Noi','nav.services':'Servicii',
@@ -1061,7 +1070,7 @@ const T = {
     'faq.a5':"Da. Realizăm piese unicat la comandă, prototipuri, piese de schimb și serii mici și medii. Fiecare componentă este fabricată și testată intern, astfel încât calitatea este controlată la fiecare pas.",
     'faq.q6':"Cum pot cere o ofertă de preț pentru prelucrări CNC?",
     'faq.a6':"Trimiteți desenul tehnic sau modelul 3D prin formularul de contact de pe această pagină, pe email la contact@dajboctechdon.com sau sunați la +40 744 987 550. Analizăm specificațiile și revenim cu ofertă de preț și termen de execuție.",
-    'foot.nav':'Navigație','foot.copy':'© 2025 DajbocTechDon S.R.L. Toate drepturile rezervate.'
+    'foot.nav':'Navigație','foot.copy':'© 2025 DajbocTechDon S.R.L. Toate drepturile rezervate.','foot.madeby':'Site realizat de'
   }
 };
 const typeWords = {
